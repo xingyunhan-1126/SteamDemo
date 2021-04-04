@@ -1,0 +1,39 @@
+<html>
+    <script>
+        function equals(obj1,obj2){
+            let f1 = obj1 instanceof Object;
+            let f2 = obj2 instanceof Object;
+            //不是对象直接比较 
+            if(!f1 || !f2){
+                return obj1 === obj2;
+            }
+            //对象的属性个数不同 返回false
+            if(Object.keys(obj1).length !== Object.keys(obj2).length){
+                return false;
+            }
+            for(var p in obj1){
+            //对象的属性有内在顺序所以可以这么做
+                if(! equals(obj1[p],obj2[p])){
+                    return false;
+                }
+            }
+            return true;
+        }
+        obj1 = {
+            name:"james",
+            age:"37",
+            friends:["kd","curry"]
+        }
+        obj2 = {
+            age:"37",
+            name:"james",
+            friends:["kd","curry"]
+            
+        }
+        console.log(Object.keys(obj1))
+        console.log(Object.keys(obj2))
+        console.log(equals(obj1,obj2));
+    </script>
+
+    
+</html>

@@ -1,0 +1,52 @@
+<html>
+    <script>
+        /*深拷贝  JSON.parse(JSON.stringify())**/
+        /*不能处理函数**/
+
+        /*手写递归**/
+        function deepCopy(obj){
+            let result;
+            if(typeof obj === 'object'){
+                if(Array.isArray(obj)){
+                    result = [];
+                    for(let i in obj){
+                        result.push(deepCopy(obj[i]));
+                    }
+                }
+                else if(obj == null){
+                    result = null;
+                }
+                else if(obj.constructor == RegExp){
+                    result = obj;
+                }
+                else{
+                    result = {};
+                    for(let i in obj){
+                        result[i] = deepCopy(obj[i]);
+                    }
+                }
+            }
+            else{
+                result = obj;
+            }
+            return result;
+
+        }
+        var obj = {
+            name:"kd",
+            age: 33,
+            friends: ["kobe","westbrook"],
+            roar: function(){
+                console.log("wowoooooow")
+            }
+        }
+        var clone = deepCopy(obj);
+        console.log(clone);
+        clone.roar = function(){
+            console.log("aaaaaaaaaaaaaaa");
+        }
+        obj.roar();
+        clone.roar();
+
+    </script>
+</html>

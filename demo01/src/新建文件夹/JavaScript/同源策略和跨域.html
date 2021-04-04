@@ -1,0 +1,50 @@
+<html>
+    <script>
+        /*域名，协议，端口 相同的 页面的脚本才会被执行**/
+        /*跨域的方法**/
+
+        /* 1  降域**/
+        /*原理 同源策略认为父域和子域是属于不同的域**/
+        // 如：
+        // child1.a.com 与 a.com，
+        // child1.a.com 与 child2.a.com，
+        // abc.child1.a.com 与 child1.a.com 
+        // 两两不同源，但是可以通过设置 document.domain='a.com'，浏览器就会认为它们都是同一个源。
+        //两个页面必须都设置
+        //document.domain='a.com'
+        // •只能在父域名与子域名之间使用，且将 xxx.child1.a.com域名设置为a.com后，不能再设置成child1.a.com
+        // •存在安全性问题，当一个站点被攻击后，另一个站点会引起安全漏洞
+        // •这种方法只适用于 Cookie 和 iframe 窗口
+
+        /* 2  JSONP跨域**/
+        // 原理：简单的说，就是动态创建<script>标签，然后利用<script>的 src 属性不受同源策略约束来跨域获取数据。
+        //举例：如果 a.com/abc.html 想得到 b.com/1.txt 中的数据，首先在abc.html中创建一个回调函数handleResponse，用来处理服务器端返回的数据。
+        //然后在abc.html中创建一个函数 foo，该函数的功能是动态添加<script>标签，src属性向服务器发送请求，请求地址为http://b.com/1.txt。
+        //然后在服务器端的请求数据1.txt中设置这个回调函数为handleResponse，并且以JSON数据形式作为参数传递，完成回调。我们来看看代码：
+        function handleResponse(response){
+            console.log(response);
+        }
+        function foo(){
+            var script = document.createElement("script");
+            script.src = "http://192.168.31.122/1.txt"
+            document.getElementsByTagName('head')[0].appendChild(script);
+        }
+        // 采用jsonp跨域也存在问题：
+        // •使用这种方法，只要是个网站都可以拿到b.com里的数据，存在安全性问题。目前已知的有Referer校验和Token校验。
+        // •只能是GET，不能POST
+        // •可能被注入恶意代码，篡改页面内容，可以采用字符串过滤来规避此问题
+
+        /* 3  CORS跨域资源共享**/
+        // 它允许浏览器向跨源服务器，发出 XMLHttpRequest 请求，从而克服了 AJAX 只能同源使用的限制。使用AJAX技术跨域获取数据
+        // 刚才的例子中，用CORS实现跨域。
+        // 在b.com里面添加响应头声明允许a.com的访问，代码
+
+        //下面是一个例子，浏览器发现这次跨源AJAX请求是简单请求，就自动在头信息之中，添加一个Origin字段
+        Origin: http://api.bob.com
+        // 如果Origin指定的域名在许可范围内，服务器返回的响应
+        Access-Control-Allow-Origin: http://api.bob.com
+
+        
+    </script>
+
+</html>

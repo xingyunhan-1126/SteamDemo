@@ -1,0 +1,25 @@
+<html>
+    <style>
+        .layout{
+            display: grid;
+            grid-template-columns: 200px auto 100px;
+            grid-template-rows: repeat(3,1000px);
+        }
+        #left{
+            background-color: red;
+        }
+        #right{
+            background-color: green;
+        }
+    </style>
+    <body>
+        <div id="header"></div>
+        <div class="layout">
+            <div id="left" class="col">左侧部</div>
+            <div id="main" class="col">主部</div>
+            
+            <div id="right" class="col">右侧部</div>
+        </div>
+        <div id="footer"></div>
+    </body>
+</html>

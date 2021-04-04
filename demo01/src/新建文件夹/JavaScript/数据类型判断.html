@@ -1,0 +1,69 @@
+<html>
+    <script>
+        //JavaScript数据类型   Number, String, undefined, Boolean, Null, Object(传递引用) 
+        // Object 又包含 Function, Array, Date 等 
+        var a = "iamstring.";
+        var b = 222;
+        var c= [1,2,3];
+        var d = new Date();
+        var e = function(){alert(111);};
+        var f = function(){this.name="22";};　
+        var g = true;
+        var h = null;
+        var i = undefined;
+        // 1.  typeof()
+        console.log(typeof(a));      //  string      √
+        console.log(typeof(b));      //  number      √    
+        console.log(typeof(c));      //  object   
+        console.log(typeof(d));      //  object
+        console.log(typeof(e));      //  function
+        console.log(typeof(f));      //  function
+        console.log(typeof(g));      //  boolean     √
+        console.log(typeof(h));      //  object
+        console.log(typeof(i));      //  undefined   √
+        // 2. instance of
+        console.log(
+            a instanceof String,     // f      a = new String("iamastring");  t
+            b instanceof Number,     // f      b = new Number(2123);      t
+            c instanceof Array,     // t    √
+            d instanceof Date,     // t     √
+            e instanceof Function,     // t √     
+            f instanceof Object,     // t   √
+            g instanceof Boolean,     // f    g = new Boolean(true);  t
+            h instanceof Object,     // f     
+            i instanceof Object,     // f
+        )
+
+        //3.  A.constructor ==
+        console.log(
+            a.constructor == String,    //t  √
+            b.constructor == Number,    //t  √
+            c.constructor == Array,     //t  √
+            d.constructor == Date,      //t  √
+            e.constructor == Function,    //t  √
+            f.constructor == Object,    //f     f.constructor == Function
+            g.constructor == Boolean,    //t  √
+            //h.constructor == Object,    //error  Cannot read property 'constructor' of null
+            //i.constructor == Object,    //error  Cannot read property 'constructor' of undefined
+        )
+
+b
+        //总结
+        // string， number， boolean, undefined 用 typeof 就行
+        // 引用类型不能用 typeof  返回都是 object
+        
+        //判断数组的方法   除了以上的 constructor 和  instance of   还有以下
+        //1  isPrototypeOf()
+
+        console.log(
+            Array.prototype.isPrototypeOf(c)      //true
+        )
+
+        //2  ES6  Array.isArray()
+        console.log(
+            Array.isArray(c)      //true
+        )
+
+
+    </script>
+</html>

@@ -1,0 +1,97 @@
+<html>
+    <style>
+    /* 水平居中 */
+    /* 1  子元素为行内元素*/
+    /* .child{
+        display: inline;
+    }
+    .parent{
+        text-align: center;
+    } */
+
+    /* 2  子元素为块元素且定宽 */ /* 对child设置左右边距为auto */
+    /* .child{
+        width: 500px;
+        display: block;
+        border: 1px solid green;
+        margin: 0px auto;  
+    }
+    .parent{
+        width: 1000px;
+        height: 1000px;
+        border: 2px solid red;
+        text-align: center;
+    } */
+
+    /*3   子元素为块元素且不定宽   同 1  **/
+    /* .child{
+        display: inline;
+    }
+    .parent{
+        text-align: center;
+    } */
+
+    /*4 flex**//*设置parent display：flex 和 justify-content：center**/
+    /* .parent{
+        width: 1000px;
+        height: 1000px;
+        border: 2px solid red;
+        display: flex;    
+        justify-content: center;
+
+    } */
+
+    /* 垂直居中 */
+    /* 1  child为单行内联文本     设置父元素的height等于行高line-height */
+    /* .child{
+        display: inline;
+        border: 1px solid green;
+        }
+    .parent{
+        border: 2px solid red;
+        line-height: 100px;
+        height: 100px;
+
+    } */
+    /* 2  child为块元素 设置子元素position:absolute 并设置top、bottom为0，父元素要设置定位为static以外的值，子元素margin:auto; */
+    /* .child{
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        height: 100px;
+        border: 1px solid green;
+        margin: auto;
+        }
+    .parent{
+        position: relative;
+        display: block;
+        border: 2px solid red;
+        height: 400px;
+        width: 400px;
+
+
+    } */
+    /* 3   flex */
+    .parent{
+        display: flex;
+        border: 2px solid red;
+        height: 400px;
+        width: 400px;
+        align-items: center;
+    }
+
+
+
+
+    </style>
+
+
+
+
+
+    <body>
+        <div class="parent">
+            <div class="child">im child</div>
+        </div>
+    </body>
+</html>

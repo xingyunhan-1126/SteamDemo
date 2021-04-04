@@ -1,0 +1,27 @@
+<html>
+    <script>
+        function Person(){ 
+            var obj={"name":"hello"}
+            return obj
+        };
+
+        var person = Person();
+
+        console.log(person.prototype);  // undefined
+        console.log(Person.prototype.constructor);  //  f Person(){}
+        console.log(person.__proto__); //Object.prototype
+        console.log(person.__proto__ === Person.prototype);  // false
+        console.log(person.__proto__.__proto__)  // null
+        console.log(person.__proto__.__proto__.__proto__) //error 
+
+        function Person(){};
+        var person = Person();
+        console.log(person.prototype);  // undefined
+        console.log(Person.prototype.constructor);  //  f Person(){}
+        console.log(person.__proto__); //Person.prototype
+        console.log(person.__proto__ === Person.prototype);  // true
+        console.log(person.__proto__.__proto__)  // Object.prototype
+        console.log(person.__proto__.__proto__.__proto__) //null
+
+    </script>
+</html>

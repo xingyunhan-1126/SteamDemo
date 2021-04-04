@@ -1,0 +1,134 @@
+<html>
+    <script>
+        function SuperType(){
+            this.value = true;
+            this.arr = ["my","name","is"];
+        }
+        SuperType.prototype.showValue = function(){
+            return this.value;
+        }
+
+        function SubType(){
+            this.subvalue = false;
+        }
+        //继承方式1，利用原型链
+        //1. 来自原型对象的引用属性是所有实例共享的。
+        //2. 创建子类实例时，无法向父类构造函数传参
+        SubType.prototype = new SuperType();
+        console.log(SubType.prototype.constructor);  //f SuperType()
+        SubType.prototype.constructor = SubType;
+        console.log(SubType.prototype.constructor);  //f SubType()
+        SubType.prototype.showSubValue = function(){
+            return this.subvalue;
+        }
+
+
+        var instance = new SubType();
+        console.log(instance);
+        console.log(instance.showValue());                            // true
+        console.log(instance instanceof SubType);                         // true
+        console.log(instance instanceof SuperType);                       // true
+        console.log(instance instanceof Object);                          // true
+        console.log(SubType.prototype.isPrototypeOf(instance));           // true
+        console.log(SuperType.prototype.isPrototypeOf(instance));         // true
+        console.log(Object.prototype.isPrototypeOf(instance));            // true
+
+        var instance2 = new SubType();                     
+        instance.arr.push("xing")
+        console.log(instance2.arr)                  //["my", "name", "is", "xing"]
+
+
+        //继承方式2，借用构造函数
+        //如果方法都在构造函数中定义，那么就无法复用函数。每次构建实例时都会在实例中保留方法函数，造成了内存的浪费，
+        //同时也无法实现同步更新，因为每个实例都是单独的方法函数。如果方法写在prototype上，就只会有一份，更新时候会做到同步更新
+        function SubType1(){
+            SuperType.call(this);
+        }
+        var instance3 = new SubType1();
+        console.log(instance3);     //ok
+        console.log(instance3.showValue);     //undefine
+
+
+        //3. 组合继承 组合了上面两种   缺点是调用了两次父类的构造函数
+        function SubType2(){
+            SuperType.call(this);  //有了自己的父类的属性
+        }
+        
+        SubType2.prototype = new SuperType(); //有了父类的方法
+        SubType2.prototype.constructor = SubType2;
+
+        //4.  原型继承 缺点是原型对象的引用属性是所有实例共享的。
+        function object(n){
+            function F(){}
+            F.prototype = n;
+            return new F();
+            
+        }
+        instance_parent = new SuperType();
+        instance4 = Object.create(instance_parent);//同下
+        var instance4 = object(instance_parent);
+
+        //5.   寄生式继承    
+        //缺点是原型对象的引用属性是所有实例共享的。
+        //每次创建对象都要创建一次方法
+        function object(n){
+            function F(){}
+            F.prototype = n;
+            return new F();
+            
+        }
+        function createChild(n){
+            var child = object(n);
+            child.method = function(){
+                console.log(child.value);
+            }
+        }
+        //6.   寄生组合式    比较好 ，只调用一次父类的构造函数。
+        function object(n){
+            function F(){}
+            F.prototype = n;
+            return new F();
+            
+        }
+        function inheritPrototype(SubType5,SuperType){
+            var prototype = object(SuperType.prototype);    //一个.__proto__和SuperType.prototype相同的实例
+            //var prototype = Object.create(SuperType.prototype);
+            SubType5.prototype = prototype;                 //指定它为Subtype的prototype 此时子类享有父类prototype的方法和属性
+
+        }
+        function SubType5(){
+            SuperType.call(this);                           //子类有自己的属性，而不再共享父类的了
+        }
+
+        inheritPrototype(SubType5,SuperType);               //方法有了
+
+        var child5 = new SubType5();                        //属性有了
+
+        SubType5.prototype.method5 = function(){            //子类自己的方法
+            console.log("hi")
+        }
+        
+        //7  ES6的class和extends
+        class SuperType1{           //后面没有（）
+            constructor(){
+                this.name = "youhan"
+                console.log('im constructor of parent')
+            }
+            sayIt = function(){
+                console.log(this.name);
+            }
+        }
+        class SubType6 extends SuperType1{
+            constructor(){
+                super();         //就叫super（） 
+                this.name = "jingyi";
+                   
+            }
+        }
+
+        childJy = new SubType6();
+        childJy.sayIt();
+
+
+    </script>
+</html>

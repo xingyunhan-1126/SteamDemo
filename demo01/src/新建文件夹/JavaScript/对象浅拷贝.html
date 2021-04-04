@@ -1,0 +1,37 @@
+<html>
+    <script>
+        
+        /*1 直接赋值**/
+        /*浅拷贝，拷贝的是对象的引用，修改一个，另一个会变化**/
+        var obj ={
+            name : "wade",
+            age : 37
+        }
+        //var clone = obj;
+
+        /*2 Object.assign()**/
+        /*当只有一层的时候是深拷贝**/
+        var clone = Object.assign({},obj);
+        clone.age = 40
+        console.log(clone)  //{name: "wade", age: 40}
+        console.log(obj)  //{name: "wade", age: 37}
+        
+        /*3 ES6 扩展运算符**/
+        /*当只有一层的时候是深拷贝**/
+        var clone = {...obj};
+
+        /*4 Array的浅拷贝  concat()**/
+        /*当只有一层的时候是深拷贝**/
+        var arr = ['wade',37];
+        var clone = arr.concat();
+        clone.push('curry');
+        console.log(arr);
+        console.log(clone);
+
+        /*4 Array的浅拷贝  slice()**/
+        var clone1 = arr.slice();
+        console.log(clone1);
+
+
+    </script>
+</html>

@@ -1,0 +1,56 @@
+<html>
+    <style>
+        /* 1   float+margin */
+        /* #main{
+            margin-left: 100px;
+            margin-right: 200px;
+            height: 1000px; 
+            background-color: green;
+        }
+        #left{
+            background-color: hotpink;
+            float: left;    
+            width: 100px;
+            height: 1000px;
+        }
+        #right{
+            background-color: blue;
+            float: right;
+            height: 1000px;
+            width: 200px;
+
+        } */
+
+        /* 2   position+margin */
+        #left{
+            position: absolute;
+            left: 0;
+            background-color: hotpink;   
+            width: 100px;
+            height: 1000px;
+        }
+        #right{
+            position: absolute;
+            right: 0;
+            background-color: blue;
+            height: 1000px;
+            width: 200px;
+
+        }
+        #main{
+            margin-left: 100px;
+            margin-right: 200px;
+            height: 1000px; 
+            background-color: green;
+        }
+        
+    </style>
+    <body>
+        <div class="layout">
+            <!-- 顺序很重要,主栏写在最后 -->
+            <div id="left">左侧部</div>
+            <div id="right">右侧部</div>
+            <div id="main">主部</div>s
+        </div>
+    </body>
+</html>

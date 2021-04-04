@@ -1,0 +1,82 @@
+<html>
+    <script>
+        // 全称Asynchronous JavaScript and XML；
+        // 异步的 JavaScript 和 XML；
+        // 可以在不重新加载整个页面的情况下，与服务器交换数据并更新部分网页内容；
+        // 能够实现局部刷新，大大降低了资源的浪费
+
+
+        //1.） 创建一个XMLHttpRequest对象；
+        // 1. 兼容IE低版本浏览器（ie5-ie6）；
+        // 2. 使用if，else或者try，catch；
+        var xhr;   
+        if(window.XMLHttpRequest){
+            xhr = new XMLHttpRequest;
+        }
+        else{
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        // readyState = 0
+
+        // 2.） 配置请求信息； open(method, url, async)
+        // 1. 请求的方式；
+        // 2. 请求文件的路径；
+        // 3. 是否异步，默认为true；
+        xhr.open("GET","/file/file.txt",true);
+
+        // 3.）发送请求； send(string)  string：参数，GET不传参，仅用于 POST 请求
+        // 1. get与post的区别；
+        // 与 POST 相比，GET 更简单也更快，并且在大部分情况下都能用；
+        //     GET存在缓存问题，使用GET方法一定要记得清除缓存，不然请求的数据不是最新的；
+        //     GET不安全，明文传输，POST更安全；
+        //     GET适用于小文件，POST没有数量限制；
+        //     GET使用send方法时不传参，POST必须传参；
+
+        // 2. get与post的使用场景；
+        xhr.send();
+        // 4.） 监听状态变化，执行相应回调函数；
+        //     1. http状态码都有哪些？
+        //     2. 不同状态码代表的含义？
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState==4 && xhr.status==200){
+                document.getElementById("div1").innerHTML = xhr.responseText;
+            }
+            else{
+                console.log("fail")
+            }
+        }
+        //每当 readyState 改变时，就会触发 onreadystatechange 事件
+        // readyState属性存有 XMLHttpRequest 的状态。从 0 到 4 发生变化。
+
+        // 0        未初始化：对象不包含数据   new XMLHttpRequest()了
+        // 1        正在装载：对象当前正在装载它的数据  send()了
+        // 2        请求已接收，已经收到服务器返回的内容   
+        // 3        请求处理中，解析服务器响应内容
+        // 4        请求已完成，且响应就绪
+
+        // 一般常见的状态码有：
+
+        // 200："OK, 成功"
+        // 404: "页面找不到"
+        // 状态码具体含义：
+
+        // 200：服务器响应正常。
+        // 304：该资源在上次请求之后没有任何修改（这通常用于浏览器的缓存机制，使用GET请求时尤其需要注意）。
+        // 400：无法找到请求的资源。
+        // 401：访问资源的权限不够。
+        // 403：没有权限访问资源。
+        // 404：需要访问的资源不存在。
+        // 405：需要访问的资源被禁止。
+        // 407：访问的资源需要代理身份验证。
+        // 414：请求的URL太长。
+        // 500：服务器内部错误。
+
+
+
+       
+
+
+
+    </script>
+</html>
